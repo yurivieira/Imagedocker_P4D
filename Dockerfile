@@ -13,6 +13,11 @@ RUN chown perforce /perforce_depot
 RUN mkdir /var/log/perforce
 RUN chown perforce /var/log/perforce
 
+RUN export P4JOURNAL=/var/log/perforce/journal
+RUN export P4LOG=/var/log/perforce/p4err
+RUN export P4ROOT=/perforce_depot
+RUN export P4PORT=1666
+
 EXPOSE 1666
 WORKDIR /perforce_depot
 VOLUME /perforce_depot
