@@ -16,7 +16,7 @@ EXPOSE 1666
 WORKDIR /perforce_depot
 VOLUME /perforce_depot
 
-ENTRYPOINT ["p4d", "-d"]
+ENTRYPOINT ["/usr/local/bin/p4d", "-D", "FOREGROUND"]
 
 
 
