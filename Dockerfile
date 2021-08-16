@@ -1,5 +1,6 @@
 FROM debian
 MAINTAINER Yuri Vieira
+LABEL version="1.0" description="Perforce Server"
 
 RUN apt-get update && apt-get upgrade && apt-get clean -y
 
@@ -16,7 +17,8 @@ EXPOSE 1666
 WORKDIR /perforce_depot
 VOLUME /perforce_depot
 
-ENTRYPOINT ["/usr/local/bin/p4d", "-D", "FOREGROUND"]
+ENTRYPOINT ["/usr/local/bin/p4d"]
+CMD ["-D", "FOREGROUND"]
 
 
 
