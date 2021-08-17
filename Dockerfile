@@ -24,7 +24,7 @@ WORKDIR /perforce_depot
 VOLUME /perforce_depot
 
 ENTRYPOINT ["/usr/local/bin/p4d"]
-CMD ["-D"]
+CMD ["-d"]
 
 
 
