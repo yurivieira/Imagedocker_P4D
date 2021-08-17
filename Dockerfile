@@ -23,8 +23,8 @@ EXPOSE 1666
 WORKDIR /perforce_depot
 VOLUME /perforce_depot
 
-ENTRYPOINT ["/usr/local/bin/p4d"]
-CMD ["-d"]
+ENTRYPOINT ["p4d -d"]
+# CMD ["-d"]
 
 
 
