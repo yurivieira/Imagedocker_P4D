@@ -10,9 +10,9 @@ RUN chmod +x /usr/local/bin/p4d
 
 # RUN adduser perforce
 RUN mkdir /perforce_depot
-RUN chown perforce /perforce_depot
+# RUN chown perforce /perforce_depot
 RUN mkdir /var/log/perforce
-RUN chown perforce /var/log/perforce
+# RUN chown perforce /var/log/perforce
 
 RUN export P4JOURNAL=/var/log/perforce/journal
 RUN export P4LOG=/var/log/perforce/p4err
