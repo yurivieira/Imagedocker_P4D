@@ -1,4 +1,4 @@
-FROM debian
+FROM ubuntu
 MAINTAINER Yuri Vieira
 LABEL version="1.0" description="Perforce Server for ARM (ev. P4D/LINUX26ARMHF/2016.1/1611275)"
 
@@ -25,6 +25,8 @@ VOLUME /perforce_depot
 
 ENTRYPOINT ["/usr/local/bin/p4d"]
 # CMD ["-d"]
+ENV P4CLIENT P4CONFIG P4PASSWD P4PORT P4USER
+
 
 
 
