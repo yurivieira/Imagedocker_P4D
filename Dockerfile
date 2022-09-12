@@ -1,18 +1,24 @@
-FROM ubuntu
+FROM debian
 MAINTAINER Yuri Vieira
-LABEL version="1.0" description="Perforce Server for ARM (ev. P4D/LINUX26ARMHF/2016.1/1611275)"
+LABEL version="latest" description="Build Box86 and Perforce Server for RPI4"
 
-RUN apt-get update && apt-get upgrade -y && apt-get clean
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install --yes --no-install-recommends git python3 build-essential cmake ca-certificates gcc-arm-linux-gnueabihf
+RUN apt-get clean
+RUN git clone https://github.com/ptitSeb/box86
 
-ADD https://github.com/yurivieira/Imagedocker_P4D/raw/main/p4d /usr/local/bin/p4d
-# COPY p4d /usr/local/bin
+RUN mkdir /box86/build
+WORKDIR /box86/build
+RUN cmake .. -DRPI4=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
+RUN make -j$(nproc)
+RUN make install
+
+WORKDIR /
+ADD http://ftp.perforce.com/perforce/r22.1/bin.linux26x86/p4d /usr/local/bin/p4d
 RUN chmod +x /usr/local/bin/p4d
 
-# RUN adduser perforce
 RUN mkdir /perforce_depot
-# RUN chown perforce /perforce_depot
 RUN mkdir /var/log/perforce
-# RUN chown perforce /var/log/perforce
 
 RUN export P4JOURNAL=/var/log/perforce/journal
 RUN export P4LOG=/var/log/perforce/p4err
@@ -23,9 +29,13 @@ EXPOSE 1666
 WORKDIR /perforce_depot
 VOLUME /perforce_depot
 
-ENTRYPOINT ["/usr/local/bin/p4d"]
+#CMD ["/box86/build/box86", "/usr/local/bin/p4d"]
+
+ENTRYPOINT ["/box86/build/box86", "/usr/local/bin/p4d"]
 # CMD ["-d"]
 ENV P4CLIENT P4CONFIG P4PASSWD P4PORT P4USER
+
+#CMD ["bash"]
 
 
 
