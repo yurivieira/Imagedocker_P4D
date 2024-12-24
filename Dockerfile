@@ -8,10 +8,6 @@ ADD https://github.com/yurivieira/Imagedocker_P4D/raw/main/p4d /usr/local/bin/p4
 # COPY p4d /usr/local/bin
 RUN chmod +x /usr/local/bin/p4d
 
-RUN apt-get install -y tzdata
-ENV TZ="America/Sao_Paulo"
-RUN datee
-
 # RUN adduser perforce
 RUN mkdir /perforce_depot
 # RUN chown perforce /perforce_depot
